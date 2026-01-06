@@ -1,0 +1,122 @@
+<mat-card class="loan-officer-card">
+
+  <!-- ================= SEARCH & FILTER ================= -->
+  <div class="toolbar">
+    <mat-form-field class="search-field">
+      <mat-label>Search Customer or Loan Type</mat-label>
+      <input matInput placeholder="Search..." (input)="searchTermChanged($event.target.value)">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="status-filter">
+      <mat-label>Filter by Status</mat-label>
+      <mat-select (selectionChange)="statusFilterChanged($event.value)">
+        <mat-option value="All">All</mat-option>
+        <mat-option [value]="LoanStatus.Approved">Approved</mat-option>
+        <mat-option [value]="LoanStatus.Rejected">Rejected</mat-option>
+        <mat-option [value]="LoanStatus.UnderReview">Under Review</mat-option>
+        <mat-option [value]="LoanStatus.Applied">Applied</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- ================= LOANS TABLE ================= -->
+  <mat-table [dataSource]="pagedApplications()" matSort (matSortChange)="sortData($event)" class="mat-elevation-z2">
+
+    <!-- Loan ID -->
+    <ng-container matColumnDef="loanId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Loan ID</mat-header-cell>
+      <mat-cell *matCellDef="let l">{{ l.loanId }}</mat-cell>
+    </ng-container>
+
+    <!-- Customer Email -->
+    <ng-container matColumnDef="customerEmail">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Customer</mat-header-cell>
+      <mat-cell *matCellDef="let l">{{ l.customerEmail }}</mat-cell>
+    </ng-container>
+
+    <!-- Loan Type -->
+    <ng-container matColumnDef="loanType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Loan Type</mat-header-cell>
+      <mat-cell *matCellDef="let l">{{ l.loanType.loanName }}</mat-cell>
+    </ng-container>
+
+    <!-- Amount -->
+    <ng-container matColumnDef="amount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+      <mat-cell *matCellDef="let l">{{ l.loanAmount | currency:'INR':'symbol':'1.0-0' }}</mat-cell>
+    </ng-container>
+
+    <!-- Tenure -->
+    <ng-container matColumnDef="tenure">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Tenure</mat-header-cell>
+      <mat-cell *matCellDef="let l">{{ l.tenure }} months</mat-cell>
+    </ng-container>
+
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let l">{{ statusText(l.status) }}</mat-cell>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let l">
+        <button mat-raised-button color="primary" *ngIf="canProcess(l)" (click)="openProcessDialog(l)">
+          Process
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  </mat-table>
+
+  <!-- ================= PAGINATOR ================= -->
+  <mat-paginator
+    [length]="filteredLoans().length"
+    [pageSize]="pageSize()"
+    [pageIndex]="pageIndex()"
+    [pageSizeOptions]="[5,10,20]"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+
+</mat-card>
+
+<!-- ================= PROCESS DIALOG ================= -->
+<ng-template #processDialog>
+  <h2 mat-dialog-title>Process Loan #{{ selectedLoan?.loanId }}</h2>
+
+  <mat-dialog-content class="dialog-content">
+    <p><b>Customer:</b> {{ selectedLoan?.customerEmail }}</p>
+    <p><b>Loan Type:</b> {{ selectedLoan?.loanType?.loanName }}</p>
+    <p><b>Interest Rate:</b> {{ selectedLoan?.loanType?.roi }}%</p>
+    <p><b>Tenure:</b> {{ selectedLoan?.tenure }} months</p>
+    <p><b>Amount:</b> {{ selectedLoan?.loanAmount | currency:'INR':'symbol':'1.0-0' }}</p>
+
+    <form [formGroup]="reviewForm" class="dialog-form">
+      <mat-form-field class="full-width">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option [value]="LoanStatus.Approved">Approved</mat-option>
+          <mat-option [value]="LoanStatus.Rejected">Rejected</mat-option>
+          <mat-option [value]="LoanStatus.UnderReview">Under Review</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Remarks</mat-label>
+        <textarea matInput rows="3" formControlName="remarks"></textarea>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" (click)="submitReview()" [disabled]="reviewForm.invalid">
+      Submit
+    </button>
+  </mat-dialog-actions>
+</ng-template>

@@ -1,0 +1,76 @@
+<h1>Register to our Loan Management System></h1>
+
+<div class="register-container">
+  <mat-card class="register-card">
+    <h2 class="title">Register</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <!-- USERNAME -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="userName" />
+        <mat-error *ngIf="form.get('userName')?.invalid">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- EMAIL -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error *ngIf="form.get('email')?.invalid">
+          Valid email is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- PASSWORD -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error *ngIf="form.get('password')?.invalid">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- ROLE -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="Customer">Customer</mat-option>
+          <mat-option value="LoanOfficer">Loan Officer</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('role')?.invalid">
+          Role is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- ANNUAL INCOME -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Annual Income</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="annualIncome"
+          placeholder="Enter annual income"
+        />
+        <mat-error *ngIf="form.get('annualIncome')?.invalid">
+          Annual income is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- SUBMIT BUTTON -->
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width"
+        type="submit"
+        [disabled]="loading"
+      >
+        <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+        <span *ngIf="!loading">Register</span>
+      </button>
+
+    </form>
+  </mat-card>
+</div>

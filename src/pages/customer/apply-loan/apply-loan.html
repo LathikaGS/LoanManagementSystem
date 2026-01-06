@@ -1,0 +1,75 @@
+<mat-card class="apply-loan-card">
+  <h2>Apply for Loan</h2>
+
+  <form [formGroup]="loanForm" (ngSubmit)="applyLoan()">
+
+    <!-- Loan Type -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Loan Type</mat-label>
+      <mat-select
+        formControlName="loanTypeId"
+        (selectionChange)="onLoanTypeChange($event.value)">
+        <mat-option *ngFor="let loan of loanTypes" [value]="loan.loanTypeId">
+          {{ loan.loanName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Loan Info -->
+<div *ngIf="selectedLoanType" class="loan-info">
+  <mat-divider></mat-divider>
+
+  <div class="info-row">
+    <span>Rate of Interest</span>
+    <strong>{{ selectedLoanType.roi }}%</strong>
+  </div>
+
+  <div class="info-row">
+    <span>Maximum Tenure</span>
+    <strong>{{ selectedLoanType.maxTenure }} months</strong>
+  </div>
+
+  <div class="info-row">
+    <span>Minimum Amount</span>
+    <strong>₹ {{ selectedLoanType.minAmount | number }}</strong>
+  </div>
+
+  <div class="info-row">
+    <span>Maximum Amount</span>
+    <strong>₹ {{ selectedLoanType.maxAmount | number }}</strong>
+  </div>
+
+  <mat-divider></mat-divider>
+</div>
+
+
+    <!-- Amount -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Loan Amount</mat-label>
+      <input matInput type="number" formControlName="amount">
+    </mat-form-field>
+
+    <!-- Tenure -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Tenure (Months)</mat-label>
+      <input matInput type="number" formControlName="tenure">
+      <mat-error *ngIf="loanForm.get('tenure')?.hasError('max')">
+        Maximum tenure allowed is {{ selectedLoanType?.maxTenure }} months
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" class="submit-btn">
+      Apply Loan
+    </button>
+  </form>
+</mat-card>
+
+<ng-template #dialogTemplate let-data="data">
+  <h2 mat-dialog-title>{{ data?.title }}</h2>
+  <mat-dialog-content>
+    <p>{{ data?.message }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" mat-dialog-close>OK</button>
+  </mat-dialog-actions>
+</ng-template>

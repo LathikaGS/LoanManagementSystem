@@ -1,0 +1,45 @@
+.page-card {
+  padding: 16px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.search-box {
+  width: 300px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+}
+
+.error-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b00020;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 32px;
+  color: #777;
+}
+
+.empty-state mat-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}

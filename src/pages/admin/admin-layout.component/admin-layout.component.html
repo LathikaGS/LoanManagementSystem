@@ -1,0 +1,27 @@
+<mat-sidenav-container class="admin-container">
+  <mat-sidenav mode="side" opened class="admin-sidenav">
+    <mat-toolbar color="primary">
+      <mat-icon>account_balance</mat-icon>
+      <span>Admin Panel</span>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/admin/dashboard">Dashboard</a>
+      <a mat-list-item routerLink="/admin/pending-users">Pending Users</a>
+      <a mat-list-item routerLink="/admin/all-users">All Users</a>
+      <a mat-list-item routerLink="/admin/loan-types">Loan Types</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <span>Admin Panel</span>
+      <span class="spacer"></span>
+      <button mat-button (click)="logout()">Logout</button>
+    </mat-toolbar>
+
+    <div class="admin-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

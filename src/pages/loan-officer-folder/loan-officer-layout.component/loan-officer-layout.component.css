@@ -1,0 +1,9 @@
+.container {
+  height: calc(100vh - 64px);
+}
+.sidenav {
+  width: 220px;
+}
+.content {
+  padding: 20px;
+}

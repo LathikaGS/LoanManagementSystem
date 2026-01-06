@@ -1,0 +1,50 @@
+<div class="stats-grid">
+  <mat-card class="stat-card">
+    <mat-icon color="primary">people</mat-icon>
+    <div class="stat-content">
+      <span>Total Users</span>
+      <h2>{{ stats?.totalUsers }}</h2>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <mat-icon color="accent">request_quote</mat-icon>
+    <div class="stat-content">
+      <span>Total Loans</span>
+      <h2>{{ stats?.totalLoans }}</h2>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <mat-icon color="primary">check_circle</mat-icon>
+    <div class="stat-content">
+      <span>Active Loans</span>
+      <h2>{{ stats?.activeLoans }}</h2>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <mat-icon color="warn">cancel</mat-icon>
+    <div class="stat-content">
+      <span>Rejected Loans</span>
+      <h2>{{ stats?.rejectedLoans }}</h2>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <mat-icon color="accent">hourglass_empty</mat-icon>
+    <div class="stat-content">
+      <span>Pending Loans</span>
+      <h2>{{ stats?.pendingLoans }}</h2>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card highlight">
+  <mat-icon>currency_rupee</mat-icon>
+  <div class="stat-content">
+    <span>Total Outstanding</span>
+    <h2>₹{{ stats?.totalOutstanding | number:'1.0-0' }}</h2>
+  </div>
+</mat-card>
+
+</div>

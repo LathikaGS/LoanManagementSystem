@@ -1,0 +1,49 @@
+.reports-container {
+  padding: 24px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.stat-card {
+  text-align: center;
+  color: white;
+  border-radius: 12px;
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.stat-card p {
+  font-size: 28px;
+  margin: 8px 0 0;
+  font-weight: bold;
+}
+
+.primary { background: #3f51b5; }
+.success { background: #4caf50; }
+.warn { background: #f44336; }
+.info { background: #ff9800; }
+.neutral { background: #607d8b; }
+.accent { background: #009688; }
+
+.table-card {
+  margin-top: 32px;
+  padding: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+.error-card {
+  margin: 24px;
+  background: #ffebee;
+  color: #b71c1c;
+  font-weight: 500;
+}

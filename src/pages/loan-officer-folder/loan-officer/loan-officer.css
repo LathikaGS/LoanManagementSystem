@@ -1,0 +1,42 @@
+mat-card {
+  padding: 16px;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+h2 {
+  margin-bottom: 12px;
+}
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* spacing between fields */
+  margin-top: 16px;
+}
+
+.dialog-info p {
+  margin: 4px 0;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;            /* 👈 space between search & filter */
+  margin-bottom: 16px;
+}
+
+.search-field {
+  flex: 1;              /* search takes more space */
+}
+
+.status-filter {
+  width: 200px;
+}

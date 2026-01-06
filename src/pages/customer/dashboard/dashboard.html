@@ -1,0 +1,19 @@
+<div *ngIf="loading(); else dashboardContent" class="loading-container">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<ng-template #dashboardContent>
+  <mat-grid-list cols="3" rowHeight="150px" gutterSize="75px">
+    <mat-grid-tile *ngFor="let status of loanStatusCounts()">
+      <mat-card [style.background-color]="statusCardColor(status.status)" class="status-card">
+        <mat-card-header>
+          <mat-icon>{{ statusIcon(status.status) }}</mat-icon>
+          <mat-card-title>{{ statusText(status.status) }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h3>{{ status.count }}</h3>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>

@@ -1,0 +1,45 @@
+<div class="reports-container">
+
+  <!-- LOADING -->
+  <div class="spinner" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- ERROR -->
+  <mat-card class="error-card" *ngIf="error">
+    {{ error }}
+  </mat-card>
+
+  <!-- DASHBOARD -->
+  <ng-container *ngIf="!loading && summary">
+
+    <!-- LOAN STATUS TABLE -->
+    <mat-card class="table-card">
+      <h2>Loan Status</h2>
+
+      <table mat-table [dataSource]="loanStatus" class="mat-elevation-z2">
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="count">
+          <th mat-header-cell *matHeaderCellDef>Number of Loans</th>
+          <td mat-cell *matCellDef="let row">{{ row.count }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="totalAmount">
+          <th mat-header-cell *matHeaderCellDef>Total Amount</th>
+          <td mat-cell *matCellDef="let row">
+            ₹ {{ row.totalAmount | number }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+
+  </ng-container>
+</div>

@@ -1,0 +1,100 @@
+<mat-card class="page-card">
+  <div class="page-header">
+    <div>
+      <h2>Pending User Requests</h2>
+      <p class="subtitle">
+        Review and manage user access requests
+      </p>
+    </div>
+
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search users</mat-label>
+      <input
+        matInput
+        placeholder="Search by email or role"
+        (keyup)="applyFilter($event)"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="state-container" *ngIf="loading()">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="40">
+    </mat-progress-spinner>
+    <span>Loading pending users...</span>
+  </div>
+
+  <div class="error-box" *ngIf="error()">
+    <mat-icon>error_outline</mat-icon>
+    {{ error() }}
+  </div>
+
+  <div class="table-container" *ngIf="!loading() && !error()">
+
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Email
+        </th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.email }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="requestedRole">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Requested Role
+        </th>
+        <td mat-cell *matCellDef="let user">
+  <span class="role-badge {{ user.requestedRole }}">{{ user.requestedRole }}</span>
+</td>
+
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
+          Actions
+        </th>
+        <td mat-cell *matCellDef="let user" class="actions-cell">
+
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="approveUser(user.id)">
+            <mat-icon>check</mat-icon>
+            Approve
+          </button>
+
+          <button
+            mat-stroked-button
+            color="warn"
+            (click)="rejectUser(user.id)">
+            <mat-icon>close</mat-icon>
+            Reject
+          </button>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <mat-paginator
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 25]"
+      showFirstLastButtons>
+    </mat-paginator>
+
+    <div class="empty-state" *ngIf="dataSource.data.length === 0">
+      <mat-icon>group_off</mat-icon>
+      <p>No pending user requests found.</p>
+    </div>
+
+  </div>
+
+</mat-card>

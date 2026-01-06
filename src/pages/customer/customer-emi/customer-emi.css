@@ -1,0 +1,82 @@
+.active-chip {
+  background-color: #83b2e2 !important; /* Material Blue 700 */
+  color: white !important;
+  font-weight: 600;
+}
+
+.loan-accordion {
+  margin: 16px;
+}
+
+.loan-panel {
+  margin-bottom: 12px;
+}
+
+.loan-header .header-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.loan-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.loan-amount {
+  font-size: 13px;
+  color: #666;
+}
+
+.loan-summary {
+  margin: 16px 0;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.summary-grid span {
+  font-size: 12px;
+  color: #777;
+}
+
+.summary-grid strong {
+  display: block;
+  font-size: 14px;
+}
+
+.paid {
+  color: #2e7d32;
+}
+
+.remaining {
+  color: #c62828;
+}
+
+.pay-all-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 0 16px;
+}
+
+.emi-table-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.emi-table th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.emi-table tr:hover {
+  background: #f5f5f5;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}

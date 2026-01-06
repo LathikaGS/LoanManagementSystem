@@ -1,0 +1,31 @@
+.customer-container {
+  height: 100vh;
+}
+
+.customer-sidenav {
+  width: 220px;
+}
+
+.sidenav-header {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.active-link {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+}
+
+.main-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.customer-content {
+  padding: 20px;
+}

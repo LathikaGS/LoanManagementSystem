@@ -1,0 +1,75 @@
+<!-- TOP TOOLBAR -->
+<mat-toolbar color="primary" class="toolbar">
+  <span class="title">
+    <mat-icon>analytics</mat-icon>
+    Loan Officer Dashboard
+  </span>
+
+  <span class="spacer"></span>
+
+  <!-- LOGOUT BUTTON -->
+  <button mat-raised-button color="warn" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Logout
+  </button>
+</mat-toolbar>
+
+<!-- LOADING -->
+<div class="loading-container" *ngIf="loading()">
+  <mat-progress-spinner diameter="50" mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<!-- DASHBOARD CONTENT -->
+<div class="dashboard" *ngIf="!loading()">
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid">
+
+    <mat-card class="kpi-card total">
+      <mat-icon>folder</mat-icon>
+      <div>
+        <h3>Total Loans</h3>
+        <p>{{ summary()?.totalLoans }}</p>
+      </div>
+    </mat-card>
+
+    <mat-card class="kpi-card approved">
+      <mat-icon>check_circle</mat-icon>
+      <div>
+        <h3>Approved</h3>
+        <p>{{ summary()?.approved }}</p>
+      </div>
+    </mat-card>
+
+    <mat-card class="kpi-card review">
+      <mat-icon>hourglass_top</mat-icon>
+      <div>
+        <h3>Under Review</h3>
+        <p>{{ summary()?.underReview }}</p>
+      </div>
+    </mat-card>
+
+    <mat-card class="kpi-card rejected">
+      <mat-icon>cancel</mat-icon>
+      <div>
+        <h3>Rejected</h3>
+        <p>{{ summary()?.rejected }}</p>
+      </div>
+    </mat-card>
+
+  </div>
+
+  <!-- OUTSTANDING -->
+  <mat-card class="outstanding-card">
+    <mat-card-title>
+      <mat-icon>currency_rupee</mat-icon>
+      Total Outstanding Amount
+    </mat-card-title>
+
+    <mat-card-content>
+  <h2>₹ {{ outstanding() | number:'1.0-0' }}</h2>
+</mat-card-content>
+
+  </mat-card>
+
+</div>

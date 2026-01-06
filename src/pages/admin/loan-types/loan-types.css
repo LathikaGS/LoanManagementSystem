@@ -1,0 +1,36 @@
+.toolbar-card {
+  display: flex;
+  align-items: left;
+  justify-content: space-between; /* left-right alignment */
+  padding: 16px;
+  margin-bottom: 16px;
+  flex-wrap: nowrap; /* prevent wrapping on desktop */
+}
+
+.search-box {
+  flex: 1;               /* take all available space */
+  min-width: 200px;      /* prevents it from collapsing */
+  margin-right: 16px;    /* gap between search and button */
+}
+
+.add-btn {
+  white-space: nowrap;
+}
+
+/* Responsive for small screens */
+@media (max-width: 600px) {
+  .toolbar-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    margin-right: 0;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+}
