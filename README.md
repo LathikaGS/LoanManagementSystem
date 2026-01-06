@@ -1,59 +1,171 @@
-# LoanManagement
+# Loan Management System
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+A secure full-stack Loan Management System developed as a capstone project using ASP.NET Core Web API and Angular. The application manages the complete loan lifecycle from application to approval, EMI tracking, and loan closure with role-based access control.
 
-## Development server
+---
 
-To start a local development server, run:
+## Project Overview
 
-```bash
+The system digitizes loan processing for banks and financial institutions by providing online loan applications, approval workflows, EMI management, and reporting dashboards. It ensures data security using JWT authentication and follows a layered architecture.
+
+---
+
+## Technology Stack
+
+### Backend
+
+* ASP.NET Core Web API (.NET 8/9)
+* Entity Framework Core
+* LINQ
+* SQL Server
+* JWT Authentication
+* Swagger / OpenAPI
+
+### Frontend
+
+* Angular (Latest)
+* TypeScript
+* Angular Material / Bootstrap
+* Reactive and Template-Driven Forms
+
+---
+
+## User Roles
+
+* Admin: Manage users, loan types, interest rates, and system configuration
+* Loan Officer: Review loan applications, approve or reject loans, generate EMI schedules
+* Customer: Apply for loans, track loan status, view EMI details
+
+---
+
+## System Architecture
+
+The application follows a layered architecture:
+
+* Angular frontend with role-based layouts (Admin, Loan Officer, Customer)
+* ASP.NET Core Web API handling business logic through controllers
+* JWT-secured communication between frontend and backend
+* Entity Framework Core for data access
+* SQL Server as the persistent data store
+
+Data Flow:
+Frontend → JWT Secured API → Controllers → Entity Framework Core → SQL Server
+
+---
+
+## Core Features
+
+* User registration and login
+* Role-based authorization
+* Online loan application management
+* Loan approval and rejection workflow
+* Automatic EMI calculation and schedule generation
+* EMI repayment and outstanding balance tracking
+* Reports and dashboards
+
+---
+
+## Loan Status Flow
+
+Applied → Under Review → Approved → Rejected → Closed
+
+---
+
+## LINQ Usage
+
+* Retrieve loans by status
+* Calculate total outstanding amount
+* Generate monthly EMI and overdue reports
+
+---
+
+## Backend Controllers and Services
+
+### Controllers (Backend)
+
+* AdminController
+* AuthController
+* EMIController
+* LoanApplicationController
+* LoanOfficerController
+* LoanTypeController
+* ReportsController
+
+### Services
+
+* EmiCalculator
+
+---
+
+## Frontend Modules and Components
+
+### Admin Module
+
+* AdminLayoutComponent
+* DashboardComponent
+* PendingUsersComponent
+* AllUsersComponent
+* LoanTypesComponent
+
+### Customer Module
+
+* CustomerLayoutComponent
+* CustomerDashboardComponent
+* ApplyLoanComponent
+* CustomerEmiComponent
+
+### Loan Officer Module
+
+* LoanOfficerLayoutComponent
+* ReportsDashboardComponent
+* ReportsSummaryComponent
+* OverdueEmisComponent
+* LoanOfficerComponent
+
+---
+
+## Validation Rules
+
+* Loan amount must be within limits defined for each loan type
+* Tenure must not exceed the maximum tenure for the loan type
+* EMI is auto-calculated using standard formula
+* UI access is restricted based on user roles
+
+---
+
+## Testing
+
+* Unit testing using xUnit
+* API testing using Postman
+* Authentication and authorization testing
+
+---
+
+## How to Run the Project
+
+### Backend
+
+```
+dotnet restore
+dotnet ef database update
+dotnet run
+```
+
+### Frontend
+
+```
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Deliverables
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* GitHub repository (Backend and Frontend)
+* Database schema
+* UI screenshots
+* Final demo presentation
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
